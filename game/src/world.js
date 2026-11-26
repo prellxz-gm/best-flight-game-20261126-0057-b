@@ -71,6 +71,8 @@ export function newGame(seed) {
     vx: 0,
     vy: 0,
     bank: 0,
+    // Compass heading in degrees: starts at 042, banking left/right turns it.
+    heading: 42,
     z: 0,
     speed: BASE_SPEED,
     boosting: false,
@@ -134,6 +136,8 @@ export function stepGame(state, input, dt) {
   state.px = clamp(state.px + state.vx * dt, -1.15, 1.15);
   state.py = clamp(state.py + state.vy * dt, 0.05, 0.98);
   state.bank = lerp(state.bank, -state.vx * 0.55, Math.min(1, dt * 8));
+  // Heading follows the bank: steering right turns the nose clockwise.
+  state.heading = (((state.heading + state.vx * dt * 14) % 360) + 360) % 360;
   state.z += state.speed * dt;
   state.travelled = state.z;
 

@@ -343,6 +343,10 @@ function drawHud(ctx, state, W, H) {
   panel(ctx, pad, H - pad - 86, 300, 86, 0.62);
   text(ctx, 'SPEED', pad + 18, H - pad - 58, 18, '#9fd8ff', 800);
   text(ctx, `${Math.round(state.speed * 3.6)} km/h`, pad + 18, H - pad - 14, 34, '#ffffff', 900);
+  // Heading chip, between SPEED and ALT so the three flight gauges sit together.
+  panel(ctx, pad + 312, H - pad - 86, 220, 86, 0.62);
+  text(ctx, 'HDG', pad + 330, H - pad - 58, 18, '#9fd8ff', 800);
+  text(ctx, `${String(Math.round(state.heading ?? 42)).padStart(3, '0')}°`, pad + 330, H - pad - 14, 34, '#ffffff', 900);
   // Bottom-right: altitude + combo.
   panel(ctx, W - pad - 300, H - pad - 86, 300, 86, 0.62);
   text(ctx, 'ALT', W - pad - 282, H - pad - 58, 18, '#9fd8ff', 800);
